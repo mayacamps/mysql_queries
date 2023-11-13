@@ -2,7 +2,7 @@
 SELECT nombre FROM producto;
 
 /*2*/-- List the names and prices of all the products in the product table
-SELECT nombre, producto.precio FROM producto;
+SELECT nombre, precio FROM producto;
 
 /*3*/-- List all columns of the product table 
 DESCRIBE producto;
@@ -98,6 +98,7 @@ SELECT p.nombre AS producto, precio, f.nombre FROM producto AS p INNER JOIN fabr
 
 /*33*/-- Returns a list with the manufacturer's code and name, only of those manufacturers that have associated products in the database
 SELECT codigo, nombre AS fabricante FROM fabricante WHERE codigo IN (SELECT DISTINCT codigo_fabricante FROM producto);
+SELECT codigo, nombre AS fabricante FROM producto JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
 
 /*34*/-- Returns a list of all the manufacturers that exist in the database, along with the products that each of them has. The list must also show those manufacturers that do not have associated products
 SELECT f.nombre AS fabricante, p.nombre AS producto FROM fabricante AS f LEFT JOIN producto AS p ON p.codigo_fabricante = f.codigo ORDER BY f.nombre;
